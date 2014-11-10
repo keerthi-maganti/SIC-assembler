@@ -1,0 +1,11 @@
+a		START	1000
+FIRST	LDA	    A1
+        ADD	    A2
+        STA	    A3
+A1		RESW	2
+A2		RESW	2
+A3		RESW	1
+A4		BYTE	C'EOFD'
+A5		WORD	23
+A6		RESB	12
+		END
