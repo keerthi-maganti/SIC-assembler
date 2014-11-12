@@ -1,4 +1,4 @@
-a		START	1000
+test	START	1000
 FIRST	LDA	    A1
         ADD	    A2
         STA	    A3

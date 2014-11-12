@@ -1,0 +1,9 @@
+
+			LABEL			ADDRESS
+FIRST    1000
+A1    1009
+A2    100f
+A3    1015
+A4    1018
+A5    101c
+A6    101f

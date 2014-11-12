@@ -4,23 +4,23 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-//#include "symtable1.h"
-//#include "testSymtab.h"
-//#include <boost/lexical_cast.hpp>
 
 using namespace std;
 
 class hashing
 {
 public:
-	string opcodeTable[49][3];
+	string opcodeTable[49][3];	//Array of strings storing MNEMONICS
+	string opCode[49][3];		//Array of strings storing corresponding OPCODES
 public:
+//Constructor to initialize the tables to zero
 	hashing()
     {
 		for(int i=0; i<49; i++)
             for(int j=0; j<3; j++)
             {
                 opcodeTable[i][j] = '0';
+                opCode[i][j] = '0';
             }
 	}
 	int hash(string word)
@@ -46,33 +46,47 @@ public:
 			if(!(opcodeTable[index][i].compare("0")))
 			{
 				opcodeTable[index][i] = word;
-				
-        //cout<<"done"<<opcodeTable[index][i]<<endl;
 		        break;
 			}
 		}
 	}
 
+	void insertOpcode(string word, string mnemo)
+	{
+		int index;
+		index = hash(mnemo);
+		int i=0;
+		for(i=0; i<3; i++)
+		{
+			if(!(opCode[index][i].compare("0")))
+			{
+				opCode[index][i] = word;
+		        break;
+			}
+		}
+	}
+
+	string getOpCode(string mnemo)
+	{
+		int index;
+		index = hash(mnemo);
+		for(int i=0; i<3; i++)
+    	{
+    		if(opcodeTable[index][i].compare(mnemo) == 0)
+    			return opCode[index][i];
+		}
+		return 0;		
+	}
 	int found(string word)
 	{
 		int index,foundFlag=0;
 		index = hash(word);
 		for(int i=0; i<3; i++)
     	{
-    		if(word == "LDA")
-    			cout<<index<<endl;
-//      cout<<opcodeTable[index][i]<<" "<<i;
     		if(opcodeTable[index][i].compare(word) == 0)
-    		{	
-//    			cout<<opcodeTable[index][i]<<endl;
-//					foundFlag=1;
     			return 1;
-			}
 		}
-//    if(foundFlag)
- //     return 1;
-  //  else
-      return 0;
+		return 0;
 	}
 };
 

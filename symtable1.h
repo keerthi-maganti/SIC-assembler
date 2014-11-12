@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
-#include "Hash.h"
+//#include "Hash.h"
 
  using namespace std;
 
@@ -20,9 +20,9 @@ struct stab
     
 struct stab *last, *first;
 
+/* Function that inserts the symbol along with it's locCntr value into the symbol table. */
 void InsertSym(string l,  int LOCCTR)
 {
-    int n;
     struct stab *p;
     p = new stab;
     p->label = l;
@@ -41,21 +41,21 @@ void InsertSym(string l,  int LOCCTR)
     size++;
 }
 
-void DisplaySym()
-{
-  int i;
-  struct stab *p;
-  p=first;
-  ofstream f("SYMTAB.txt");
-  cout<<"\n\t\t\tLABEL\t\t\tADDRESS\n";
-    for(i=0;i<size;i++)
-   {
-      f << p->label <<"    "<< hex << p->addr << endl;
-      cout<<"\n\t\t\t"<<p->label<<"\t\t\t"<<p->addr<<endl;
-      p=p->next;
-  }
-  f.close();
-}
+// void DisplaySym()
+// {
+//     int i;
+//     struct stab *p;
+//     p = first;
+// //    ofstream f("SYMTAB.txt");
+//     cout<<"\n\t\t\tLABEL\t\t\tADDRESS\n";
+//     for(i=0; i<size; i++)
+//     {
+// //      f << p->label <<"    "<< hex << p->addr << endl;
+//       cout<<"\n\t\t\t"<<p->label<<"\t\t\t"<<p->addr<<endl;
+//       p=p->next;
+//     }
+// //    f.close();
+// }
 
 bool SearchSym(string lab)
 {
@@ -69,6 +69,23 @@ bool SearchSym(string lab)
     p=p->next;
    }
  return flag;
+}
+
+int getTargetAddr(string lab)
+{
+  int i,flag=0;
+  struct stab *p;
+  p=first;
+  for(i=0;i<size;i++)
+  {
+    if(p->label == lab)
+    {
+      flag=1;
+      return p->addr;
+    }
+    p=p->next;
+  }
+  return flag; 
 }
 
 // void init()
